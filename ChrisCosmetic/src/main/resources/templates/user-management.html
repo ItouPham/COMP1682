@@ -79,7 +79,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="account, iterStat : ${account}">
+                <tr th:each="account, iterStat : ${accounts}">
                     <th th:text="${iterStat.count}"></th>
                     <td th:text="${account.email}"></td>
                     <td th:text="${account.firstName}"></td>
@@ -101,6 +101,105 @@
                 </tr>
                 </tbody>
             </table>
+            <div>
+                Total Account: [[${totalItems}]]
+            </div>
+            <nav class="pt-3 mb-5">
+                <ul class="pagination justify-content-center align-items-center mb-0 fs-16 font-weight-600">
+                    <li class="page-item fs-18 d-none d-sm-block">
+                        <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                           th:href="@{/admin/account/page/1}" tabindex="-1"><i class="far fa-angle-double-left"></i></a>
+                    </li>
+                    <li class="page-item fs-18 d-none d-sm-block">
+                        <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                           th:if="${currentPage > 1}"
+                           th:href="@{'/admin/account/page/' + ${currentPage - 1}}" tabindex="-1"><i
+                                class="far fa-angle-left"></i></a>
+
+                        <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                           th:unless="${currentPage > 1}"
+                           href="#" tabindex="-1"><i class="far fa-angle-left"></i></a>
+                    </li>
+
+                    <th:block th:if="${totalPages <= 10}">
+                        <th:block th:each="i: ${#numbers.sequence(1, totalPages)}">
+                            <li th:if="${i != currentPage}" class="page-item">
+                                <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                                   th:href="@{'/admin/account/page/' + ${i}}">[[${i}]]</a>
+                            </li>
+                            <li th:unless="${i != currentPage}" class="page-item active">
+                                <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                                   href="#">[[${i}]]</a>
+                            </li>
+                        </th:block>
+                    </th:block>
+
+                    <th:block th:if="${totalPages > 10}">
+                        <th:block th:if="${currentPage <= 5 || currentPage >= totalPages - 4}">
+                            <th:block th:each="i: ${#numbers.sequence(1, 5)}">
+                                <li class="page-item">
+                                    <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                                       th:href="@{'/admin/account/page/' + ${i}}">[[${i}]]</a>
+                                </li>
+
+                            </th:block>
+
+                            <th:block th:if="${currentPage < totalPages - 4}">
+                                <li class="page-item">
+                                    <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                                       th:href="@{'/admin/account/page/' + ${currentPage + 6}}">...</a>
+                                </li>
+                            </th:block>
+                            <th:block th:unless="${currentPage < totalPages - 4}">
+                                <li class="page-item">
+                                    <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                                       th:href="@{'/admin/account/page/' + ${currentPage - 6}}">...</a>
+                                </li>
+                            </th:block>
+                            <th:block th:each="i: ${#numbers.sequence(totalPages - 4, totalPages)}">
+                                <li class="page-item">
+                                    <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                                       th:href="@{'/admin/account/page/' + ${i}}">[[${i}]]</a>
+                                </li>
+                            </th:block>
+                        </th:block>
+                    </th:block>
+
+                    <th:block th:if="${currentPage > 5 && currentPage < totalPages - 4}">
+                        <li class="page-item">
+                            <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                               th:href="@{'/admin/account/page/' + ${currentPage - 5}}">...</a>
+                        </li>
+                        <th:block th:each="i: ${#numbers.sequence(currentPage - 4, currentPage + 4)}">
+                            <li class="page-item">
+                                <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                                   th:href="@{'/admin/account/page/' + ${i}}">[[${i}]]</a>
+                            </li>
+
+                        </th:block>
+                        <li class="page-item">
+                            <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                               th:href="@{'/admin/account/page/' + ${currentPage + 5}}">...</a>
+                        </li>
+                    </th:block>
+
+                    </li>
+                    <li class="page-item fs-18 d-none d-sm-block">
+                        <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                           th:if="${currentPage < totalPages}"
+                           th:href="@{'/admin/account/page/' + ${currentPage + 1}}"><i
+                                class="far fa-angle-right"></i></a>
+
+                        <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                           th:unless="${currentPage < totalPages}"
+                           href="#"><i class="far fa-angle-right"></i></a>
+                    </li>
+                    <li class="page-item fs-18 d-none d-sm-block">
+                        <a class="page-link rounded-circle w-40px h-40 p-0 justify-content-center align-items-center d-flex"
+                           th:href="@{'/admin/account/page/' + ${totalPages}}"><i class="far fa-angle-double-right"></i></a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </section>
     <script>

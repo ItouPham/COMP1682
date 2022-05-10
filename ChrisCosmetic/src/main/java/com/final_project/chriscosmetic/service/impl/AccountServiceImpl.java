@@ -7,6 +7,9 @@ import com.final_project.chriscosmetic.exception.AccountNotFoundException;
 import com.final_project.chriscosmetic.repository.AccountRepository;
 import com.final_project.chriscosmetic.service.AccountService;
 import com.final_project.chriscosmetic.service.RoleService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,8 +37,9 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public List<Account> findAll() {
-        return accountRepository.findAll();
+    public Page<Account> findAll(int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber - 1,10);
+        return accountRepository.findAll(pageable);
     }
 
     @Override

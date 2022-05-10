@@ -52,7 +52,17 @@ public class AdminController {
 
     @GetMapping("/account")
     public String userList(Model model) {
-        model.addAttribute("account", accountService.findAll());
+        return listAccountByPage(model, 1);
+    }
+
+    @GetMapping("/account/page/{pageNumber}")
+    public String listAccountByPage(Model model, @PathVariable("pageNumber") int currentPage) {
+        Page<Account> page = accountService.findAll(currentPage);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("accounts", page.getContent());
+
         return "user-management";
     }
 
