@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/admin-layout.html}">
+
+<head th:replace="fragments/css-js/css-js::head">
+</head>
+<body>
+	<main id="content" layout:fragment="content">
+		<h1 class="admin-home" style="text-align: center; height:500px; background-color: #00ffff38;">MAIN HOMEPAGE</h1>
+	</main>
+	<th:block th:replace="fragments/css-js/css-js::js"></th:block>
+</body>
+
+</html>

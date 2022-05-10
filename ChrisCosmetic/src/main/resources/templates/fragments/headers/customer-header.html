@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+</head>
+
+<body>
+<header
+        class="main-header navbar-light header-sticky header-sticky-smart header-04"
+        th:fragment="header">
+    <div class="sticky-area bg-white">
+        <div class="container container-xxl">
+            <nav class="navbar navbar-expand-xl px-0 d-block">
+                <div class="d-none d-xl-block">
+                    <div class="d-flex align-items-center flex-nowrap">
+                        <div class="w-50">
+                            <ul class="navbar-nav hover-menu main-menu px-0 mx-xl-n5">
+                                <li aria-haspopup="true" aria-expanded="false"
+                                    class="nav-item dropdown-item-home dropdown py-2 py-xl-7 px-0 px-xl-5">
+                                    <a class="nav-link p-0" th:href="@{/}"> Home <span
+                                            class="caret"></span>
+                                    </a>
+                                </li>
+                                <li aria-haspopup="true" aria-expanded="false"
+                                    class="nav-item dropdown-item-shop dropdown py-2 py-xl-7 px-0 px-xl-5">
+                                    <a class="nav-link dropdown-toggle p-0" href="product.html">
+                                        Makeup <span class="caret"></span>
+                                    </a>
+                                    <div
+                                            class="dropdown-menu dropdown-menu-xl px-0 pb-10 pt-5 dropdown-menu-listing overflow-hidden x-animated x-fadeInUp">
+                                        <div class="container container-xxl px-xxl-9 d-block">
+                                            <div class="row">
+                                                <div class="col">
+
+                                                    <h4 class="dropdown-header text-secondary fs-18 mb-1 lh-1">
+                                                        <a th:href="@{/product/category/1}">Face</a>
+                                                    </h4>
+
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/1}">
+                                                            Foundation </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/2}"> Highlight </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/3}"> Concealer </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/4}"> Blusher </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+
+                                                    <h4 class="dropdown-header text-secondary fs-18 mb-1 lh-1">
+                                                        <a th:href="@{/product/category/2}">Lips</a>
+                                                    </h4>
+
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/5}"> Lip Balm </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/6}"> Lipstick </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/7}"> Lip Gloss </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+
+                                                    <h4 class="dropdown-header text-secondary fs-18 mb-1 lh-1">
+                                                        <a th:href="@{/product/category/3}">Eyes</a>
+                                                    </h4>
+
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/8}"> Eyeliner </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/9}"> Mascara </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/10}"> Eyebrows </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/11}"> Eye
+                                                            shadow </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li aria-haspopup="true" aria-expanded="false"
+                                    class="nav-item dropdown-item-shop dropdown py-2 py-xl-7 px-0 px-xl-5">
+                                    <a class="nav-link dropdown-toggle p-0" href="product.html">
+                                        Skincare <span class="caret"></span>
+                                    </a>
+                                    <div
+                                            class="dropdown-menu dropdown-menu-xl px-0 pb-10 pt-5 dropdown-menu-listing overflow-hidden x-animated x-fadeInUp">
+                                        <div class="container container-xxl px-xxl-9 d-block">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h4 class="dropdown-header text-secondary fs-18 mb-1 lh-1"
+                                                        th:href="@{/product/category/4}">
+                                                        Cleansing</h4>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/12}">
+                                                            Cleanser </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/13}">
+                                                            Makeup Remover</a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/14}">
+                                                            Cotton pad </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+
+                                                    <h4 class="dropdown-header text-secondary fs-18 mb-1 lh-1"
+                                                        th:href="@{/product/category/5}">
+                                                        Mask</h4>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/15}">
+                                                            Clay Mask </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/16}">
+                                                            Sheet Mask </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/17}">
+                                                            Eyes Mask </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/18}">
+                                                            Sleeping Mask </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/19}">
+                                                            Lip mask </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <h4 class="dropdown-header text-secondary fs-18 mb-1 lh-1"
+                                                        th:href="@{/product/category/6}">
+                                                        Skin</h4>
+
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/20}">
+                                                            Toner </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/21}">
+                                                            Serum </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/22}">
+                                                            Hydrating </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/23}">
+                                                            Sunscreen </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li aria-haspopup="true" aria-expanded="false"
+                                    class="nav-item dropdown-item-shop dropdown py-2 py-xl-7 px-0 px-xl-5">
+                                    <a class="nav-link dropdown-toggle p-0" href="product.html">
+                                        Body care <span class="caret"></span>
+                                    </a>
+                                    <div
+                                            class="dropdown-menu dropdown-menu-xl px-0 pb-10 pt-5 dropdown-menu-listing overflow-hidden x-animated x-fadeInUp">
+                                        <div class="container container-xxl px-xxl-9 d-block">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h4 class="dropdown-header text-secondary fs-18 mb-1 lh-1"
+                                                        th:href="@{/product/category/7}">
+                                                        Skin body</h4>
+
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/24}">
+                                                            Body Lotion </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/25}">
+                                                            Body Scrub </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/26}">
+                                                            Body Wash </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/27}">
+                                                            Body Cream </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+
+                                                    <h4 class="dropdown-header text-secondary fs-18 mb-1 lh-1"
+                                                        th:href="@{/product/category/8}">
+                                                        Hair</h4>
+
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/28}">
+                                                            Shampoo </a>
+                                                    </div>
+                                                    <div class="dropdown-item">
+                                                        <a class="dropdown-link" th:href="@{/product/29}">
+                                                            Conditioner </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mx-auto flex-shrink-0 px-10">
+                            <div
+                                    class="d-flex mt-3 mt-xl-0 align-items-center w-100 justify-content-center">
+                                <a class="navbar-brand mx-auto d-inline-block py-0"
+                                   th:href="@{/}"> <img th:src="@{/images/logo.png}" width="100" height="100"
+                                                        alt="Glowing">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="w-50">
+                            <div class="d-flex align-items-center justify-content-end">
+                                <ul
+                                        class="navbar-nav flex-row justify-content-xl-end d-flex flex-wrap text-body py-0 navbar-right">
+                                    <li class="nav-item mr-5"><a
+                                            class="nav-link position-relative px-4 menu-cart py-0 d-inline-flex align-items-center mr-n2"
+                                            th:href="@{/cart}" data-canvas="true"
+                                            data-canvas-options='{"container":".cart-canvas"}'>
+                                        <svg
+                                                class="icon icon-shopping-bag-open-light">
+                                            <use
+                                                    xlink:href="#icon-shopping-bag-open-light"></use>
+                                        </svg>
+                                        <span
+                                                class="position-absolute number">0</span>
+                                    </a></li>
+                                    <th:block th:unless="${#request.userPrincipal != null}">
+                                        <li aria-haspopup="true" aria-expanded="false"
+                                            class="nav-item px-xl-5">
+                                            <a class="nav-link p-0"
+                                               th:href="@{/register}"> Register
+                                                <span class="caret"></span>
+                                            </a></li>
+                                        <li aria-haspopup="true" aria-expanded="false"
+                                            class="nav-item px-xl-5"><a class="nav-link p-0"
+                                                                        th:href="@{/login}"> Login <span
+                                                class="caret"></span>
+                                        </a></li>
+                                    </th:block>
+                                    <form th:if="${#request.userPrincipal != null}"
+                                          th:action="@{/logout}" method="post"
+                                          aria-haspopup="true" aria-expanded="false"
+                                          class="nav-item px-xl-5">
+                                        <button type="submit" value="Sign Out" class="nav-link p-0 logoutBtn"
+                                                th:href="@{/login}"> Logout <span class="caret"></span>
+                                        </button>
+                                    </form>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+</body>
+</html>

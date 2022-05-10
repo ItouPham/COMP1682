@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-layout.html}"
+>
+<head>
+    <title>Update Product</title>
+</head>
+
+<body>
+<main id="content" layout:fragment="content">
+    <section class="py-2 bg-gray-2">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-site py-0 d-flex justify-content-center">
+                    <li class="breadcrumb-item"><a class="text-decoration-none text-body" href="index.html">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active pl-0 d-flex align-items-center" aria-current="page">Update
+                        Product
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container container-xl">
+            <h2 class="text-center mt-6 mb-6">Update Product</h2>
+            <form th:action="@{/admin/product/edit}" method="post" th:object="${product}"
+                  enctype="multipart/form-data">
+                <input name="id" type="hidden" th:field="*{id}"/>
+                <div class="infor-group">
+                    <h6 class="col-sm-2 infor-label">Product Name:</h6>
+                    <input th:field="*{productName}" type="text" class="col-sm-4 infor-content"></input>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2 infor-label">Product Category:</h6>
+                    <select class="col-sm-4 infor-content" name="subCategoryID" id="subCategoryID"
+                            th:field="*{subCategoryID}">
+                        <option th:each="category : ${categories}" th:value="${category.id}"
+                                th:text="${category.subCategoryName}"
+                                th:selected="${category.id == product.subCategoryID}">Category
+                        </option>
+                    </select>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2 infor-label">Price:</h6>
+                    <input th:field="*{price}" type="text" class="col-sm-4 infor-content"></input>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2 infor-label">Quantity:</h6>
+                    <input th:field="*{quantity}" type="text" class="col-sm-4 infor-content"></input>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2 infor-label">Short Description:</h6>
+                    <input th:field="*{productShortDesc}" type="text" class="col-sm-4 infor-content"></input>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2 infor-label">Detail Description:</h6>
+                    <textarea th:field="*{productDetailDesc}" name="" id="" rows="5"
+                              class="col-sm-4 infor-content"></textarea>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2 infor-label">Image:</h6>
+                    <div class="col-sm-4 infor-content mt-2">
+                        <script>
+                                function chooseFile(fileInput){
+                                    if (fileInput.files && fileInput.files[0]){
+                                        var reader = new FileReader();
+
+                                        reader.onload = function (e){
+                                            $('#image').attr('src',e.target.result);
+                                        }
+
+                                        reader.readAsDataURL(fileInput.files[0]);
+                                    }
+                                }
+                        </script>
+                        <img id="image" th:src="*{productImagePath}" width="200" height="200"
+                             class="img-fluid ${3|rounded-top, rounded-right,rounded-bottom,rounded-left,rounded-circle, |}"
+                             alt="">
+                        <input type="file" name="fileImage" id="fileImage" onchange="chooseFile(this)" class="mt-5" accept="image/png, image/jpeg" />
+                    </div>
+                </div>
+                <div class="infor-group mt-8 mb-8">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-layout.html}"
+>
+<head>
+    <title>Add New Product</title>
+</head>
+
+<body>
+<main id="content" layout:fragment="content">
+    <section class="py-2 bg-gray-2">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-site py-0 d-flex justify-content-center">
+                    <li class="breadcrumb-item"><a class="text-decoration-none text-body" href="index.html">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active pl-0 d-flex align-items-center" aria-current="page">Add New
+                        Product
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container container-xl">
+            <h2 class="text-center mt-6 mb-6">Add New Product</h2>
+            <form th:action="@{/admin/product/add}" method="post" th:object="${product}"
+            enctype="multipart/form-data">
+                <div class="infor-group">
+                    <h6 class="col-sm-2 infor-label">Product Name:</h6>
+                    <div class="col-sm-4 infor-content">
+                    <input th:field="*{productName}" type="text" style="width: 100%;" th:errorClass="is-invalid"></input>
+                    <div th:if="${#fields.hasErrors('productName')}"
+                         th:errors="*{productName}" class="invalid-feedback"
+                    ></div>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2 infor-label">Product Category:</h6>
+                    <div class="col-sm-4 infor-content">
+                    <select style="width: 100%;" name="subCategoryID" id="subCategoryID"
+                            th:field="*{subCategoryID}" th:errorClass="is-invalid">
+                        <option th:each="category : ${categories}" th:value="${category.id}"
+                                th:text="${category.subCategoryName}"
+                                th:selected="${category.id == product.subCategoryID}">Category
+                        </option>
+                    </select>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2 infor-label" >Price:</h6>
+                    <div class="col-sm-4 infor-content">
+                    <input th:field="*{price}" type="text" style="width: 100%;" th:errorClass="is-invalid"></input>
+                    <div th:if="${#fields.hasErrors('price')}"
+                         th:errors="*{price}" class="invalid-feedback"
+                    ></div>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2 infor-label">Quantity:</h6>
+                    <div class="col-sm-4 infor-content">
+                    <input th:field="*{quantity}" type="text" style="width: 100%;" th:errorClass="is-invalid"></input>
+                    <div th:if="${#fields.hasErrors('quantity')}"
+                         th:errors="*{quantity}" class="invalid-feedback"
+                    ></div>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2 infor-label">Short Description:</h6>
+                    <div class="col-sm-4 infor-content">
+                    <input th:field="*{productShortDesc}" type="text" style="width: 100%;" th:errorClass="is-invalid"></input>
+                    <div th:if="${#fields.hasErrors('productShortDesc')}"
+                         th:errors="*{productShortDesc}" class="invalid-feedback"
+                    ></div>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2 infor-label">Detail Description:</h6>
+                    <div class="col-sm-4 infor-content">
+                    <textarea th:field="*{productDetailDesc}" name="" id="" rows="5" style="width: 100%;" th:errorClass="is-invalid"></textarea>
+                    <div th:if="${#fields.hasErrors('productDetailDesc')}"
+                         th:errors="*{productDetailDesc}" class="invalid-feedback"
+                    ></div>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2 infor-label">Image:</h6>
+                    <div class="col-sm-4 infor-content mt-2">
+                        <script>
+                                function chooseFile(fileInput){
+                                    if (fileInput.files && fileInput.files[0]){
+                                        var reader = new FileReader();
+
+                                        reader.onload = function (e){
+                                            $('#image').attr('src',e.target.result);
+                                        }
+
+                                        reader.readAsDataURL(fileInput.files[0]);
+                                    }
+                                }
+                        </script>
+                        <img id="image" src="/images/no-image.png" width="200" height="200"
+                             class="img-fluid ${3|rounded-top, rounded-right,rounded-bottom,rounded-left,rounded-circle, |}"
+                             alt="">
+                        <input type="file" name="fileImage" id="fileImage" onchange="chooseFile(this)" class="mt-5" accept="image/png, image/jpeg" th:errorClass="is-invalid"></input>
+                        <div th:if="${#fields.hasErrors('fileImage')}"
+                             th:errors="*{fileImage}" class="invalid-feedback"
+                        ></div>
+                    </div>
+                </div>
+                <div class="infor-group mt-8 mb-8">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+</body>
+</html>

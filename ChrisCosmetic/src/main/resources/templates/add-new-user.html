@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-layout.html}"
+>
+<head>
+    <title>Add New Account</title>
+</head>
+<body>
+<main id="content" layout:fragment="content">
+    <section class="py-2 bg-gray-2">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol
+                        class="breadcrumb breadcrumb-site py-0 d-flex justify-content-center"
+                >
+                    <li class="breadcrumb-item"><a
+                            class="text-decoration-none text-body" th:href="@{/}"
+                    >Home</a></li>
+                    <li class="breadcrumb-item active pl-0 d-flex align-items-center"
+                        aria-current="page">
+                        Add New User
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container container-xl">
+            <h2 class="text-center mt-6 mb-6">
+               Add New User
+            </h2>
+            <form th:action="@{/admin/account/add}" method="post"
+                  th:object="${account}"
+            >
+                <div class="infor-group">
+                    <h6 class="col-sm-2">Email:</h6>
+                    <div class="col-sm-4 infor-content p-0">
+
+                        <input name="email" type="text" th:field="*{email}"
+                               style="width: 100%;" th:errorClass="is-invalid"
+                        ></input>
+                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                             class="invalid-feedback"
+                        ></div>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2">Password:</h6>
+                    <div class="col-sm-4 infor-content p-0">
+                        <input name="password" type="password" th:field="*{password}"
+                               style="width: 100%;" th:errorClass="is-invalid"
+                        ></input>
+                        <div th:if="${#fields.hasErrors('password')}"
+                             th:errors="*{password}" class="invalid-feedback"
+                        ></div>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2">First Name:</h6>
+                    <div class="col-sm-4 infor-content p-0">
+                        <input name="first-name" type="text" th:field="*{firstName}"
+                               style="width: 100%;" th:errorClass="is-invalid"
+                        ></input>
+                        <div th:if="${#fields.hasErrors('firstName')}"
+                             th:errors="*{firstName}" class="invalid-feedback"
+                        ></div>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2">Last Name:</h6>
+                    <div class="col-sm-4 infor-content p-0">
+                        <input name="last-name" type="text" th:field="*{lastName}"
+                               style="width: 100%;" th:errorClass="is-invalid"
+                        ></input>
+                        <div th:if="${#fields.hasErrors('lastName')}"
+                             th:errors="*{lastName}" class="invalid-feedback"
+                        ></div>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2">Telephone:</h6>
+                    <div class="col-sm-4 infor-content p-0">
+                        <input type="text" style="width: 100%;" th:field="*{telephone}"></input>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2">Address:</h6>
+                    <div class="col-sm-4 infor-content p-0">
+                        <input type="text" style="width: 100%;" th:field="*{address}"></input>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2">Role:</h6>
+                    <select class="col-sm-4 infor-content" th:field="*{roleID}">
+                        <option th:each="option : ${roles}" th:value="${option.id}" th:text="${option.roleName}"></option>
+                    </select>
+                </div>
+                <div class="infor-group mt-8 mb-8">
+                    <button type="submit" value="Login" class="btn btn-primary">
+                        Add New Account
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+</body>
+</html>
