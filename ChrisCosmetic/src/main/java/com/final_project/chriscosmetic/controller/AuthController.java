@@ -1,10 +1,14 @@
 package com.final_project.chriscosmetic.controller;
 
 import com.final_project.chriscosmetic.dto.req.RegisterReqDTO;
+import com.final_project.chriscosmetic.entity.Account;
 import com.final_project.chriscosmetic.exception.EmailAlreadyExistException;
+import com.final_project.chriscosmetic.security.CustomUserDetails;
+import com.final_project.chriscosmetic.service.AccountService;
 import com.final_project.chriscosmetic.service.AuthService;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,13 +26,16 @@ import javax.validation.Valid;
 public class AuthController {
 
     private AuthService authService;
+    private AccountService accountService;
 
-    public AuthController(AuthService authService) {
+    public AuthController(AuthService authService,
+                          AccountService accountService) {
         this.authService = authService;
+        this.accountService = accountService;
     }
 
     @GetMapping("/login")
-    public String showLoginPage(){
+    public String showLoginPage() {
         if (isAuthenticated()) {
             return "redirect:/";
         }
@@ -62,9 +69,26 @@ public class AuthController {
         return "redirect:/login";
     }
 
+    @GetMapping("/profile")
+    public String viewProfilePage(@AuthenticationPrincipal CustomUserDetails loggedUser,
+                                  Model model) {
+        String email = loggedUser.getUsername();
+        Account account = accountService.findByEmail(email);
+        model.addAttribute("account", account);
+        return "profile";
+    }
+
+    @GetMapping("/profile/edit")
+    public String viewUpdateProfilePage(@AuthenticationPrincipal CustomUserDetails loggedUser,
+                                  Model model) {
+        String email = loggedUser.getUsername();
+        Account account = accountService.findByEmail(email);
+        model.addAttribute("account", account);
+        return "update-profile";
+    }
+
     @RequestMapping("/403")
-    public String show403Page()
-    {
+    public String show403Page() {
         return "403";
     }
 

@@ -21053,6 +21053,9 @@ svg.icon {
   justify-content: center;
 }
 
+.infor-contents{
+  align-items: center;
+}
 .header-border{
   border-bottom: 1px solid black !important;
 }

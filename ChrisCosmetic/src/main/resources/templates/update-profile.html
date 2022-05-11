@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/customer-layout.html}">
+<head>
+    <title>Profile</title>
+</head>
+<body>
+<main id="content" layout:fragment="content">
+    <section>
+        <div class="container container-xl">
+            <h2 class="text-center mt-6 mb-6">Update Profile</h2>
+            <form action="" method="post"
+                  th:object="${account}">
+                <div class="infor-group">
+                    <h6 class="col-sm-2">Email:</h6>
+                    <div class="col-sm-4 infor-content p-0">
+                        <input name="id" type="hidden" th:field="*{id}"/>
+                        <input name="email" type="text" th:field="*{email}"
+                               style="width: 100%;" th:errorClass="is-invalid" th:readonly="true"
+                        ></input>
+                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                             class="invalid-feedback"
+                        ></div>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2">Password:</h6>
+                    <div class="col-sm-4 infor-content p-0">
+                        <input name="password" type="password" th:field="*{password}"
+                               style="width: 100%;" th:errorClass="is-invalid"
+                        ></input>
+                        <div th:if="${#fields.hasErrors('password')}"
+                             th:errors="*{password}" class="invalid-feedback"
+                        ></div>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2">First Name:</h6>
+                    <div class="col-sm-4 infor-content p-0">
+                        <input name="first-name" type="text" th:field="*{firstName}"
+                               style="width: 100%;" th:errorClass="is-invalid"
+                        ></input>
+                        <div th:if="${#fields.hasErrors('firstName')}"
+                             th:errors="*{firstName}" class="invalid-feedback"
+                        ></div>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2">Last Name:</h6>
+                    <div class="col-sm-4 infor-content p-0">
+                        <input name="last-name" type="text" th:field="*{lastName}"
+                               style="width: 100%;" th:errorClass="is-invalid"
+                        ></input>
+                        <div th:if="${#fields.hasErrors('lastName')}"
+                             th:errors="*{lastName}" class="invalid-feedback"
+                        ></div>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2">Telephone:</h6>
+                    <div class="col-sm-4 infor-content p-0">
+                        <input type="text" style="width: 100%;" th:field="*{telephone}"></input>
+                    </div>
+                </div>
+                <div class="infor-group mt-3">
+                    <h6 class="col-sm-2">Address:</h6>
+                    <div class="col-sm-4 infor-content p-0">
+                        <input type="text" style="width: 100%;" th:field="*{address}"></input>
+                    </div>
+                </div>
+                <div class="infor-group mt-8 mb-8">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+</body>
+</html>

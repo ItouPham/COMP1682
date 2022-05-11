@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/customer-layout.html}">
+<head>
+    <title>Profile</title>
+</head>
+<body>
+<main id="content" layout:fragment="content">
+    <section class="py-2 bg-gray-2">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol
+                        class="breadcrumb breadcrumb-site py-0 d-flex justify-content-center"
+                >
+                    <li class="breadcrumb-item"><a
+                            class="text-decoration-none text-body" th:href="@{/}"
+                    >Home</a></li>
+                    <li class="breadcrumb-item active pl-0 d-flex align-items-center"
+                        aria-current="page"
+                    >Profile
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+        <section>
+            <div class="container container-xl">
+                <h2 class="text-center mt-6 mb-6">Profile</h2>
+                <div th:each="account : ${account}">
+                    <div class="infor-group">
+                        <h6 class="col-sm-2 infor-label">Email:</h6>
+                        <span type="text" class="col-sm-2 infor-contents" th:text="${account.email}"></span>
+                    </div>
+                    <div class="infor-group mt-3">
+                        <h6 class="col-sm-2 infor-label">First Name:</h6>
+                        <span type="text" class="col-sm-2 infor-contents" th:text="${account.firstName}"></span>
+                    </div>
+                    <div class="infor-group mt-3">
+                        <h6 class="col-sm-2 infor-label">Last Name:</h6>
+                        <span type="text" class="col-sm-2 infor-contents" th:text="${account.lastName}"></span>
+                    </div>
+                    <div class="infor-group mt-3">
+                        <h6 class="col-sm-2 infor-label">Telephone:</h6>
+                        <span type="text" class="col-sm-2 infor-contents" th:text="${account.telephone}"></span>
+                    </div>
+                    <div class="infor-group mt-3">
+                        <h6 class="col-sm-2 infor-label">Address:</h6>
+                        <span type="text" class="col-sm-2 infor-contents" th:text="${account.address}"></span>
+                    </div>
+                    <div class="infor-group mt-8 mb-8">
+                        <a th:href="@{/profile/edit}" class="btn btn-primary">Update</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

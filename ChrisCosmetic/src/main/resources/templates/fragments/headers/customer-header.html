@@ -243,8 +243,6 @@
                                             <use
                                                     xlink:href="#icon-shopping-bag-open-light"></use>
                                         </svg>
-                                        <span
-                                                class="position-absolute number">0</span>
                                     </a></li>
                                     <th:block th:unless="${#request.userPrincipal != null}">
                                         <li aria-haspopup="true" aria-expanded="false"
@@ -259,6 +257,13 @@
                                                 class="caret"></span>
                                         </a></li>
                                     </th:block>
+                                    <div th:if="${#request.userPrincipal != null}"
+                                          aria-haspopup="true" aria-expanded="false"
+                                          class="nav-item px-xl-5">
+                                        <a  class="nav-link p-0 logoutBtn"
+                                                th:href="@{/profile}"> Profile <span class="caret"></span>
+                                        </a>
+                                    </div>
                                     <form th:if="${#request.userPrincipal != null}"
                                           th:action="@{/logout}" method="post"
                                           aria-haspopup="true" aria-expanded="false"

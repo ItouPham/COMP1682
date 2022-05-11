@@ -28,37 +28,17 @@
                         <div class="card border-0" style="box-shadow: 0 0 10px 0 rgba(0,0,0,0.1)">
                             <div class="card-header px-0 mx-6 bg-transparent py-5">
                                 <h4 class="fs-24 mb-5">Order Summary</h4>
-                                <div class="media w-100 mb-4">
+                                <div class="media w-100 mb-4" th:each="item, iterStat : ${cartItems}">
                                     <div class="w-60px mr-3">
-                                        <img src="images/product-07.jpg" alt="Natural Coconut Cleansing Oi">
+                                        <img th:src="@{${item.product.productImagePath}}" th:alt="${item.product.productName}">
                                     </div>
                                     <div class="media-body d-flex">
                                         <div class="cart-price pr-6">
-                                            <a href="#" class="text-secondary pr-6">Natural Coconut Cleansing Oil<span
-                                                    class="text-body"> x1</span></a>
-                                            <p class="fs-14 text-secondary mb-0 mt-1">Size:<span class="text-body"> Fullsize</span>
-                                            </p>
+                                            <a href="#" class="text-secondary pr-6"><th:block th:text="${item.product.productName}"></th:block><span
+                                                    class="text-body"> x<th:block th:text="${item.quantity}"></th:block></span></a>
                                         </div>
                                         <div class="ml-auto">
-                                            <p class="fs-14 text-secondary mb-0 font-weight-bold">$29.00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="media w-100">
-                                    <div class="w-60px mr-3">
-                                        <img src="images/product-05.jpg" alt="Cleansing Balm">
-                                    </div>
-                                    <div class="media-body d-flex">
-                                        <div class="cart-price">
-                                            <a href="#" class="text-secondary pr-6">Cleansing Balm<span
-                                                    class="text-body"> x1</span></a>
-                                            <p class="fs-14 text-secondary my-1">Size:<span
-                                                    class="text-body"> Fullsize</span></p>
-                                            <p class="fs-14 text-secondary mb-0 mt-1">Colors:<span class="text-body"> Green - Revitalizing</span>
-                                            </p>
-                                        </div>
-                                        <div class="ml-auto">
-                                            <p class="fs-14 text-secondary mb-0 font-weight-bold">$29.00</p>
+                                            <p class="fs-14 text-secondary mb-0 font-weight-bold">$<th:block th:text="${item.product.price*item.quantity}"></th:block></p>
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +46,7 @@
                             <div class="card-body px-6 pt-5">
                                 <div class="d-flex align-items-center mb-2">
                                     <span>Subtotal:</span>
-                                    <span class="d-block ml-auto text-secondary font-weight-bold">$99.00</span>
+                                    <span class="d-block ml-auto text-secondary font-weight-bold">$<th:block th:text="${total}"></th:block></span>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <span>Shipping:</span>
@@ -76,7 +56,7 @@
                             <div class="card-footer bg-transparent px-0 pb-1 mx-6">
                                 <div class="d-flex align-items-center font-weight-bold mb-3">
                                     <span class="text-secondary">Total pricre:</span>
-                                    <span class="d-block ml-auto text-secondary fs-24 font-weight-bold">$99.00</span>
+                                    <span class="d-block ml-auto text-secondary fs-24 font-weight-bold">$<th:block th:text="${total}"></th:block></span>
                                 </div>
                             </div>
                         </div>
