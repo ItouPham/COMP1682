@@ -1,15 +1,20 @@
 package com.final_project.chriscosmetic.controller;
 
+import com.final_project.chriscosmetic.dto.req.EditAccountReqDTO;
 import com.final_project.chriscosmetic.dto.req.RegisterReqDTO;
 import com.final_project.chriscosmetic.entity.Account;
+import com.final_project.chriscosmetic.entity.Role;
 import com.final_project.chriscosmetic.exception.EmailAlreadyExistException;
+import com.final_project.chriscosmetic.exception.RoleNotFoundException;
 import com.final_project.chriscosmetic.security.CustomUserDetails;
 import com.final_project.chriscosmetic.service.AccountService;
 import com.final_project.chriscosmetic.service.AuthService;
+import com.final_project.chriscosmetic.service.RoleService;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,17 +26,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Objects;
 
 @Controller
 public class AuthController {
 
     private AuthService authService;
     private AccountService accountService;
+    private RoleService roleService;
 
     public AuthController(AuthService authService,
-                          AccountService accountService) {
+                          AccountService accountService,
+                          RoleService roleService) {
         this.authService = authService;
         this.accountService = accountService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/login")
@@ -83,8 +93,44 @@ public class AuthController {
                                   Model model) {
         String email = loggedUser.getUsername();
         Account account = accountService.findByEmail(email);
-        model.addAttribute("account", account);
+        EditAccountReqDTO reqDTO = new EditAccountReqDTO();
+        reqDTO.setId(account.getId());
+        reqDTO.setLastName(account.getLastName());
+        reqDTO.setFirstName(account.getFirstName());
+        reqDTO.setEmail(account.getEmail());
+        reqDTO.setPassword(account.getPassword());
+        reqDTO.setRoleID(account.getRoles().stream().map(Role::getId).findFirst().orElseThrow(RoleNotFoundException::new));
+        reqDTO.setAddress(account.getAddress());
+        reqDTO.setTelephone(account.getTelephone());
+
+        model.addAttribute("account", reqDTO);
+        model.addAttribute("roles", roleService.findAllRole());
         return "update-profile";
+    }
+
+    @PostMapping("/profile/update")
+    public String updateProfile(@ModelAttribute("account") @Valid EditAccountReqDTO accountDTO,
+                                RedirectAttributes redirect,
+                                BindingResult result, Model model){
+        model.addAttribute("roles", roleService.findAllRole());
+        if (!Objects.equals(accountService.findByEmail(accountDTO.getEmail()).getId(), accountDTO.getId())) {
+            result.addError(new FieldError("account", "email", "Email address already in use"));
+        }
+
+        if (!accountDTO.getPassword().isEmpty()) {
+            if (accountDTO.getPassword().length() < 6) {
+                result.addError(new FieldError("account", "password", "Password must be at least 6 characters"));
+            }
+        }
+
+        if (result.hasErrors()) {
+            return "/update-profile";
+        }
+
+        accountService.editAccount(accountDTO);
+        redirect.addFlashAttribute("successMessage", "Update profile successfully");
+
+        return "redirect:/profile";
     }
 
     @RequestMapping("/403")

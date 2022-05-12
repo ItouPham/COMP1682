@@ -42,4 +42,9 @@ public class AuthServiceImpl implements AuthService {
         account.setPassword(bCryptPasswordEncoder.encode(registerReqDTO.getPassword()));
         accountRepository.save(account);
     }
+
+    @Override
+    public void save(Account account) {
+        accountRepository.save(account);
+    }
 }
